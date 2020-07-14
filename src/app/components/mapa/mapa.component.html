@@ -1,0 +1,23 @@
+
+<mat-card>
+    <mat-card-title>Mapa</mat-card-title>
+    <mat-card-content>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [scrollwheel]="false" (mapClick)="agregarMarcador($event)">
+            <agm-marker *ngFor="let mar of marcadores; let i = index" [latitude]="mar.lat" [longitude]="mar.lng">
+                <agm-info-window>
+                    <strong>{{mar.titulo}}</strong>
+                    <p>{{mar.descripcion}}</p>
+                    <div>
+                        <button mat-raised-button color="primary" (click)="editarMarc(mar)">Editar</button>
+                        <button mat-raised-button color="warn" (click)="borrarMarc(i)">Borrar</button>
+                    </div>
+                </agm-info-window>
+            </agm-marker>
+        </agm-map>
+        <mat-google-maps-autocomplete [appearance]="appearance.OUTLINE"
+                                      (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                                      (onLocationSelected)="onLocationSelected($event)"
+                                      (onGermanAddressMapped)="onGermanAddressMapped($event)">
+        </mat-google-maps-autocomplete>
+    </mat-card-content>
+</mat-card>
